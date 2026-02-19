@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>
+Call رابطہ
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family: Arial, sans-serif;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:18px;
+background:
+radial-gradient(900px 500px at 15% 10%, rgba(37,211,102,0.35), transparent 55%),
+radial-gradient(700px 400px at 85% 90%, rgba(7,94,84,0.35), transparent 55%),
+linear-gradient(135deg, #0b3f39, #0a6b5d, #25D366);
+}
+.card{
+width:100%;
+max-width:560px;
+background: rgba(255,255,255,0.95);
+border-radius:20px;
+box-shadow:0 14px 45px rgba(0,0,0,0.30);
+overflow:hidden;
+}
+.topbar{
+padding:18px;
+background: linear-gradient(135deg,#075E54,#25D366);
+color:#fff;
+text-align:center;
+font-weight:900;
+}
+.content{
+padding:26px 18px;
+text-align:center;
+}
+.btn{
+width:100%;
+background:linear-gradient(135deg,#25D366,#1fb85a);
+color:#fff;
+border:none;
+border-radius:14px;
+padding:16px;
+font-size:18px;
+font-weight:900;
+cursor:pointer;
+}
+.infoBox{
+margin-top:14px;
+background:#fff;
+border:1px solid rgba(0,0,0,.08);
+border-radius:14px;
+padding:14px;
+}
+.number{
+font-weight:900;
+font-size:20px;
+color:#075E54;
+direction:ltr;
+margin-bottom:12px;
+}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="topbar">
+نمائندے سے فوری رابطہ
+</div>
+<div class="content">
+<button class="btn" id="playBtn">
+▶️ START
+</button>
+<div class="infoBox hidden" id="progressBox">
+نمبر ظاہر ہونے سے پہلے انتظار کریں…
+<br />
+<b id="countdown">15</b> سیکنڈ
+</div>
+<div class="infoBox hidden" id="afterBox">
+<div class="number" id="numberText">
+03276134241
+</div>
+<button class="btn" id="callBtn">
+ابھی Call کریں
+</button>
+</div>
+</div>
+</div>
+
+<script>
+const chosenNumber = "03276134241";
+
+const playBtn = document.getElementById("playBtn");
+const progressBox = document.getElementById("progressBox");
+const afterBox = document.getElementById("afterBox");
+const numberText = document.getElementById("numberText");
+const callBtn = document.getElementById("callBtn");
+const countdownEl = document.getElementById("countdown");
+
+let started = false;
+
+playBtn.onclick = () => {
+if(started) return;
+
+started = true;
+playBtn.classList.add("hidden");
+progressBox.classList.remove("hidden");
+
+let left = 15; // countdown 15 sec
+countdownEl.textContent = left;
+
+const timer = setInterval(()=>{
+left--;
+countdownEl.textContent = left;
+if(left <= 0) clearInterval(timer);
+},1000);
+
+setTimeout(()=>{
+progressBox.classList.add("hidden");
+afterBox.classList.remove("hidden");
+numberText.textContent = chosenNumber;
+callBtn.onclick = ()=> window.location.href = "tel:" + chosenNumber;
+},15000); // 15 sec delay
+};
+</script>
+</body>
+</html>
